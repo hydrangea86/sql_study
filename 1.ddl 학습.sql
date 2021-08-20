@@ -6,8 +6,6 @@ select sysdate from dual;
 SELECT SYSDATE FROM DUAL;
 
 
-
-
 -- DDL:데이터 정의어
 -- CREATE TABLE
 CREATE TABLE BOARD(
@@ -18,10 +16,12 @@ CREATE TABLE BOARD(
     REG_DATE DATE
 );
 
+
 -- ALTER:데이터베이스의 구조를 변경
 ALTER TABLE BOARD
 ADD CONSTRAINT pk_board_bno
 PRIMARY KEY(BNO);
+
 
 -- 데이터 추가
 INSERT INTO BOARD
@@ -30,8 +30,6 @@ VALUES
     (1,'안녕안녕','내용내용','김철수',SYSDATE);
     
 SELECT*FROM BOARD;
-
-
 
 
 -- 댓글 테이블 생성 
@@ -47,6 +45,7 @@ ALTER TABLE REPLY
 ADD CONSTRAINT fk_reply_bno
 FOREIGN KEY(BNO)
 REFERENCES BOARD(BNO);
+
 
 -- 컬럼(열)변경
 
