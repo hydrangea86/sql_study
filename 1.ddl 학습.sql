@@ -6,7 +6,10 @@ select sysdate from dual;
 SELECT SYSDATE FROM DUAL;
 
 
--- DDL:데이터 정의어
+-- DDL:데이터 정의어 
+-- CREATE, ALTER, RENAME, DROP
+
+
 -- CREATE TABLE
 CREATE TABLE BOARD(
     BNO NUMBER(10),
@@ -29,7 +32,7 @@ INSERT INTO BOARD
 VALUES
     (1,'안녕안녕','내용내용','김철수',SYSDATE);
     
-SELECT*FROM BOARD;
+SELECT * FROM BOARD;
 
 
 -- 댓글 테이블 생성 

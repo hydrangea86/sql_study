@@ -81,7 +81,7 @@ VALUES
 ROLLBACK;
 
 DELETE FORM board
-WHRER bno = 1;
+WHERE bno = 1;
 
 SELECT * FROM board;
 
@@ -96,7 +96,7 @@ ROLLBACK;
 TRUNCATE TABLE board;
 
 
--- 3. DROP TABLE(ROLLBACK 불가능, 자동커밋, 로그남지않음, 테이블 구조가 완전 삭제됌)
+-- 3. DROP TABLE(ROLLBACK 불가능, 자동커밋, 로그남지않음, 테이블 구조가 완전 삭제)
 -- DDL(CREATE, ALTER, DROP, RENAME, TURNCATE)은 자동커밋
 
 DROP TABLE board;
