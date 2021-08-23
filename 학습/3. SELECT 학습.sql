@@ -34,8 +34,8 @@ FROM tb_certi;
 -- 별칭(ALIAS) 지정
 SELECT 
     certi_cd AS "자격증 코드"
-    , certi_nm AS "자격증명"
-    , issue_insti_nm "발급기관명"
+    , certi_nm 자격증명
+    , issue_insti_nm "발급 기관명"
 FROM tb_certi;
 
 
@@ -140,6 +140,9 @@ FROM tb_emp
 WHERE emp_nm LIKE '_정%'
 ;
 
+
+-- 성씨가 김씨이면서, 부서가 100003, 100004, 100006번 중에 하나이면서, 
+-- 90년대생인 사원의 사번, 이름, 생일, 부서코드를 조회
 SELECT
     emp_no, emp_nm, birth_de, dept_cd
 FROM tb_emp
@@ -162,13 +165,17 @@ WHERE sex_cd <> 1
 
 -- null값 조회
 SELECT 
-    emp_no, emp_nm, direct_manager_emp_no
+    emp_no, 
+    emp_nm, 
+    direct_manager_emp_no
 FROM tb_emp
 WHERE direct_manager_emp_no IS NULL
 ;
 
 SELECT 
-    emp_no, emp_nm, direct_manager_emp_no
+    emp_no, 
+    emp_nm, 
+    direct_manager_emp_no
 FROM tb_emp
 WHERE direct_manager_emp_no IS NOT NULL
 ;
