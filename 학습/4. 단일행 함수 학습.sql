@@ -1,5 +1,6 @@
 -- # 문자열 비교
 
+
 -- CHAR타입끼리의 비교 (고정 바이트 설정 ex: 주민등록 번호 13자리)
 DROP TABLE CHAR_COMPARE;
 CREATE TABLE CHAR_COMPARE (
@@ -15,12 +16,14 @@ COMMIT;
 
 SELECT * FROM char_compare;
 
+
 -- REPLACE(X, a, b): X에서 a를 찾아 b로 전부 바꿈
 -- REPLACE(X, a): X에서 a를 찾아 전부 삭제
 SELECT 
     REPLACE(char_4, ' ', '+') AS char_4,
     REPLACE(char_6, ' ', '+') AS char_6
 FROM char_compare;
+
 
 -- CHAR끼리는 문자열 뜻(글자모양)이 같으면 참 공백 무시
 SELECT 
@@ -41,6 +44,7 @@ WHERE sn = '102'
 
 SELECT * FROM char_compare;
 
+
 -- 한쪽이 VARCHAR타입일 경우의 비교
 DROP TABLE VARCHAR_COMPARE;
 CREATE TABLE VARCHAR_COMPARE (
@@ -48,14 +52,17 @@ CREATE TABLE VARCHAR_COMPARE (
     char_4 CHAR(4),
     varchar_6 VARCHAR2(6)
 );
--- VARCHAR2는 의도적으로 공백을 넣어야 공백으로 처리 됌.
+
+
+-- VARCHAR2는 의도적으로 공백을 넣으면 공백으로 처리.
 INSERT INTO varchar_compare VALUES ('101', 'SQLD', 'SQLD  ');
 INSERT INTO varchar_compare VALUES ('102', 'SQLD', 'SQLA  ');
 COMMIT;
 
 SELECT * FROM varchar_compare;
 
--- VARCHAR2는 글자수가 다르면 다르게 처리 됌.
+
+-- VARCHAR2는 문자모양이 같아도 길이가 다르면 다르게 처리.
 SELECT 
     REPLACE(char_4, ' ', '+') AS char_4,
     REPLACE(varchar_6, ' ', '+') AS varchar_6
@@ -64,6 +71,7 @@ WHERE sn = '101'
     AND char_4 = varchar_6
 ;
 
+
 -- 상수문자열과의 비교
 -- 상수 쪽을 변수 타입과 동일하게 바꾸고 비교한다.
 SELECT 
@@ -71,7 +79,7 @@ SELECT
     REPLACE(varchar_6, ' ', '+') AS varchar_6
 FROM varchar_compare
 WHERE sn = '101'
-    AND char_4 = 'SQLD    '
+    AND char_4 = 'SQLD'
 ;
 
 SELECT 
@@ -116,9 +124,9 @@ SELECT
     CEIL(38.678) AS ceil, -- 올림값 반환
     FLOOR(38.678) AS floor, -- 내림값 반환
     ROUND(38.678, 2) AS round, -- 자리수까지 반올림
-    TRUNC(38.678, 2) AS trunc  -- 자리수 이하를 절삭
-    , ABS(-20) AS abs   -- 절대값
-    , SIGN(99) AS sign  -- 0보다 작으면 -1, 0보다 크면 1, 0이면 0
+    TRUNC(38.678, 2) AS trunc,  -- 자리수 이하를 절삭
+    ABS(-20) AS abs,   -- 절대값
+    SIGN(99) AS sign  -- 0보다 작으면 -1, 0보다 크면 1, 0이면 0
 FROM dual;
 
 -- ## 날짜형 함수
@@ -223,9 +231,10 @@ WHERE emp_nm = '박찬호';
 -- NVL2(expr1, expr2, expr3)
 -- expr1의 값이 Null이 아니면 expr2를 반환, Null이면 expr3를 반환
 SELECT 
-    emp_nm,
-    NVL2(direct_manager_emp_no, '일반사원', '회장님') AS 직위
-FROM tb_emp;
+    emp_nm
+    ,NVL2(direct_manager_emp_no, '일반사원', '회장님') AS 직위
+FROM tb_emp
+;
 
 -- NULLIF(expr1, expr2)
 -- 두 값이 같으면 NULL리턴, 다르면 expr1 리턴

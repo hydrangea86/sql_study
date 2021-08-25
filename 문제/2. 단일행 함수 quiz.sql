@@ -1,4 +1,10 @@
 
+SELECT
+    first_name, last_name
+FROM employees
+WHERE LOWER(first_name) = 'david'
+;
+
 
 SELECT
     first_name, last_name
@@ -20,6 +26,14 @@ SELECT
     first_name, 
     last_name,
     CONCAT(first_name, last_name) AS name
+FROM employees
+;
+
+SELECT
+    first_name,
+    last_name,
+    first_name || last_name  AS "FULLNAME"
+   
 FROM employees
 ;
 

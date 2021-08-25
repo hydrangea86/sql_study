@@ -13,7 +13,7 @@ SELECT * FROM tb_sal_his
 
 SELECT 
     SUM(pay_amt) AS 지급총액,
-    AVG(pay_amt) AS 평균지급액,
+    AVG(pay_amt) AS 평균지급액
 FROM tb_sal_his
 ;
 
@@ -23,6 +23,7 @@ SELECT
     ,MIN(birth_de) AS "최연장자의 생년월일"
 FROM tb_emp
 ;
+
 
 -- COUNT(컬럼명) NULL값 제외
 -- COUNT(*) NULL값 포함
@@ -73,8 +74,8 @@ ORDER BY emp_no, pay_de
 
 SELECT 
     emp_no
-    ,MAX(pay_amt) AS "최고 수령액"
-    ,MIN(pay_amt) AS "최저 수령액"
+    ,TO_CHAR(MAX(pay_amt), 'L999,999,999') AS "최고 수령액"
+    ,TO_CHAR(MIN(pay_amt), 'L999,999,999') AS "최저 수령액"
     ,TO_CHAR(ROUND(AVG(pay_amt), 2),'L999,999,999') AS "평균 수령액"
 FROM tb_sal_his
 GROUP BY emp_no
@@ -85,8 +86,8 @@ ORDER BY emp_no
 -- 평균 수령액이 450만원 이상이 사원만 조회
 SELECT 
     emp_no
-    ,MAX(pay_amt) AS "최고 수령액"
-    ,MIN(pay_amt) AS "최저 수령액"
+    ,TO_CHAR(MAX(pay_amt), 'L999,999,999') AS "최고 수령액"
+    ,TO_CHAR(MIN(pay_amt), 'L999,999,999') AS "최저 수령액"
     ,TO_CHAR(ROUND(AVG(pay_amt), 2),'L999,999,999') AS "평균 수령액"
 FROM tb_sal_his
 GROUP BY emp_no
@@ -98,8 +99,8 @@ ORDER BY emp_no
 -- 사원별로 2019년도 급여수령액 중 최고수령액, 최저수령액, 평균수령액 조회
 SELECT 
     emp_no
-    ,MAX(pay_amt) AS "최고 수령액"
-    ,MIN(pay_amt) AS "최저 수령액"
+    ,TO_CHAR(MAX(pay_amt), 'L999,999,999') AS "최고 수령액"
+    ,TO_CHAR(MIN(pay_amt), 'L999,999,999') AS "최저 수령액"
     ,TO_CHAR(ROUND(AVG(pay_amt), 2),'L999,999,999') AS "평균 수령액"
 FROM tb_sal_his
 WHERE pay_de BETWEEN '20190101' AND '20191231'
@@ -111,8 +112,8 @@ ORDER BY emp_no
 -- 사원별로 2019년도 평균수령액이 450만원 이상인 사람만 조회
 SELECT 
     emp_no
-    ,MAX(pay_amt) AS "최고 수령액"
-    ,MIN(pay_amt) AS "최저 수령액"
+    ,TO_CHAR(MAX(pay_amt), 'L999,999,999') AS "최고 수령액"
+    ,TO_CHAR(MIN(pay_amt), 'L999,999,999') AS "최저 수령액"
     ,TO_CHAR(ROUND(AVG(pay_amt), 2),'L999,999,999') AS "평균 수령액"
 FROM tb_sal_his
 WHERE pay_de BETWEEN '20190101' AND '20191231'
@@ -125,8 +126,8 @@ ORDER BY emp_no
 -- 추가로 2019년 연봉을 추가로 조회
 SELECT 
     emp_no
-    ,MAX(pay_amt) AS "최고 수령액"
-    ,MIN(pay_amt) AS "최저 수령액"
+    ,TO_CHAR(MAX(pay_amt), 'L999,999,999') AS "최고 수령액"
+    ,TO_CHAR(MIN(pay_amt), 'L999,999,999') AS "최저 수령액"
     ,TO_CHAR(ROUND(AVG(pay_amt), 2),'L999,999,999') AS "평균 수령액"
     ,TO_CHAR(ROUND(SUM(pay_amt), 2),'L999,999,999') AS "연봉"
 FROM tb_sal_his
@@ -149,17 +150,20 @@ FROM tb_emp
 ORDER BY emp_nm DESC
 ;
 
+
 -- ORDER BY 별칭으로 가능
 SELECT emp_no AS 사번, emp_nm AS 이름, addr AS 주소
 FROM tb_emp
 ORDER BY 사번 DESC
 ;
 
+
 -- ORDER BY 컬럼 순번으로 가능
 SELECT emp_no AS 사번, emp_nm AS 이름, addr AS 주소
 FROM tb_emp
 ORDER BY 2 DESC
 ;
+
 
 -- ORDER BY 컬럼명 두개일시 1차 정렬 실행 후 2차 정렬 실행 
 SELECT emp_no AS 사번, emp_nm AS 이름, addr AS 주소
@@ -172,7 +176,8 @@ FROM tb_emp
 ORDER BY 2, 1 DESC
 ;
 
--- 별칭과 컬럼 순번 혼형해서 쓸 수 있음
+
+-- ORDER BY 칭과 컬럼 순번 혼형해서 쓸 수 있음
 SELECT emp_no AS 사번, emp_nm AS 이름, addr AS 주소
 FROM tb_emp
 ORDER BY 이름, 1 DESC
