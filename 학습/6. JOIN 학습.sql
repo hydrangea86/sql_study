@@ -46,7 +46,7 @@ SELECT * FROM TEST_B;
 SELECT
     id, content, reply
 FROM test_a, test_b
-WHERE test_a.id = test_B.a_id
+WHERE test_A.id = test_B.a_id
 ;
 
 
@@ -86,7 +86,7 @@ SELECT
     C.dept_cd, COUNT(*)
 FROM tb_emp_certi A, tb_certi B, tb_emp C, tb_dept D
 WHERE A.certi_cd = B.certi_cd
-    AND A.emp_no = c.emp_no
+    AND A.emp_no = C.emp_no
     AND C.dept_cd = D.dept_cd
 GROUP BY C.dept_cd
 ;
@@ -97,7 +97,7 @@ SELECT
     A.emp_no, C.emp_nm, A.certi_cd, B.certi_nm, A.acqu_de
 FROM tb_emp_certi A, tb_certi B, tb_emp C
 WHERE A.certi_cd = B.certi_cd
-    AND A.emp_no = c.emp_no
+    AND A.emp_no = C.emp_no
     AND A.acqu_de BETWEEN '20190101' AND '20191231'
     AND C.emp_nm LIKE '이%'
 ORDER BY A.acqu_de
@@ -194,7 +194,7 @@ FROM tb_emp_certi A
 JOIN tb_certi B 
 ON A.certi_cd = B.certi_cd --추가 있을 시 AND * *= **
 JOIN tb_emp C 
-ON A.emp_no = c.emp_no
+ON A.emp_no = C.emp_no
 JOIN tb_dept D
 ON C.dept_cd = D.dept_cd
 WHERE C.birth_de BETWEEN '19800101' AND '19891231'

@@ -26,7 +26,7 @@ ADD CONSTRAINT pk_board_bno
 PRIMARY KEY(BNO);
 
 
--- 데이터 추가
+-- INSEERT 데이터 추가 (DML)
 INSERT INTO BOARD
     (bno, title, content, writer, reg_date)
 VALUES
@@ -42,6 +42,7 @@ CREATE TABLE REPLY (
     R_WRITER VARCHAR2(50),
     BNO NUMBER(10)
 );
+
 
 -- 연관관계 설정: BOARD테이블과 REPLY테이블간의 관계 지정
 ALTER TABLE REPLY
@@ -61,9 +62,17 @@ MODIFY(title VARCHAR2(400));
 ALTER TABLE BOARD
 DROP COLUMN view_count;
 
+
+--컬럽 이름 바꾸기
+ALTER TABLE BOARD
+RENAME COLUMN writer TO writer1;
+
+--테이블 이름 바꾸기(RENAME oldname TO changename;
+RENAME BOARD TO BOARD1;
+
+
 -- table 삭제
 DROP TABLE REPLY;
-DROP TABLE BOARD;
-
+DROP TABLE BOARD1;
 
 

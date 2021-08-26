@@ -108,7 +108,7 @@ SELECT
     CONCAT('SQL', 'Developer'),   -- 문자열을 결합
     SUBSTR('SQL Developer', 1, 3), -- 문자열 자름 1번부터 3개자름 (첫글자가 1번)
     LENGTH('HELLO WORLD'),         -- 문자열의 길이
-    TRIM('    HI   ')              -- 좌우 공백 제거
+    TRIM('    HI   ')              -- 좌우 공백 제거(RTRIM:오른쪽 공백 제거, LTRIM: 왼쪽 공백 제거)
 FROM dual;
 
 SELECT 
@@ -194,7 +194,7 @@ SELECT
 FROM tb_sal;
 
 SELECT
-    sal_cd,
+    sal_cd, sal_nm,  
     DECODE(sal_cd, '100001', '기본급여', '100002', '보너스급여', '기타') AS sal_name
 FROM tb_sal;
 

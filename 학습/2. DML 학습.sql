@@ -1,4 +1,12 @@
 
+CREATE TABLE BOARD(
+    BNO NUMBER(10) PRIMARY KEY,
+    TITLE VARCHAR2(200) NOT NULL,
+    CONTENT VARCHAR2(2000),
+    WRITER VARCHAR2(50) NOT NULL,
+    REG_DATE DATE
+);
+
 -- DML: 데이터 조작어
 -- SELECT, INSERT, UPDATE, DELETE
 
@@ -22,6 +30,7 @@ INSERT INTO BOARD
 VALUES
     (1, '새로운 글이야', '재밌는 내용입니다3.','둘리', SYSDATE);
 
+SELECT * FROM BOARD;
     
 INSERT INTO BOARD
     (bno, title, writer, reg_date)
@@ -41,14 +50,18 @@ SET title = '굿애프터눈'
 WHERE bno = 3;
 
 UPDATE board
-SET content = `'굿애프터눈~~'
+SET content = 'hello'
 WHERE bno = 3;
 
+
 UPDATE board
-SET title = '메롱메롱이'
-        .content = '야호야호야호야호~7~~'
-        .writer = '박영희'
+SET title = '방가방가'
+        , content = 'hello~~~'
+        , writer = '박영희'
 WHERE bno = 1;
+
+
+SELECT * FROM board;
 
 
 -- WHERE절을 생략할 경우 전체행이 수정되므로 주의
@@ -62,7 +75,7 @@ SET age = age + 1;
 
 --데이터 삭제
 DELETE FROM board
-WHERE bno = 1;
+WHERE bno = 4;
 
 INSERT INTO BOARD
     (bno, title, content, writer, reg_date)
@@ -70,6 +83,8 @@ VALUES
     (3, '안녕~', '재밌는 내용입니다.', '마이콜', SYSDATE);
 
 COMMIT;
+
+SELECT * FROM board;
 
 INSERT INTO BOARD
     (bno, title, content, writer, reg_date)

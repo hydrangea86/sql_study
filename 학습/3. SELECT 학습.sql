@@ -41,7 +41,7 @@ FROM tb_certi;
 
 -- 결합연산자 ( || ) 을 통한 컬럼문자열 결합
 SELECT 
-    certi_nm || '(' || certi_cd || ') - ' || issue_insti_nm AS "자격증 정보"
+    certi_nm ||'(' || certi_cd || ')' || '-' || issue_insti_nm AS "자격증 정보"
 FROM tb_certi;
 
 
@@ -92,7 +92,7 @@ WHERE dept_cd = '100004'
 ;
 
 
--- IN 연산자
+-- IN(LIST 목록 값) 연산자
 SELECT 
     emp_no, emp_nm, dept_cd
 FROM tb_emp
