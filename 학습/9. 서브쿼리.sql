@@ -74,4 +74,66 @@ GROUP BY A.emp_no, B.emp_nm
 ORDER BY A.emp_no
 ;
 
+-- # 다중 컬럼 서브쿼리
+-- 비교 대상 다중 컬럼 수 맞춰줘야 함
 
+-- 부서원이 2명 이상인 부서 중에서 각 부서의 가장 연장자의 사원정보를 조회
+SELECT
+    A.emp_no, A.emp_nm, A.birth_de, A.dept_cd, B.dept_nm
+FROM tb_emp A
+JOIN tb_dept B
+ON A.dept_cd = B.dept_cd
+WHERE (A.dept_cd, A.birth_de) IN(
+                    SELECT 
+                        dept_cd, MIN(birth_de)
+                    FROM tb_emp
+                    GROUP BY dept_cd
+                    HAVING COUNT(*) >= 2
+                   )
+ORDER BY A.emp_no
+;
+
+-- EXISTS 문
+
+-- 주소가 강남인 직원들이 근무하고 있는 부서들의 부서정보를 조회
+
+SELECT
+    emp_nm, addr, dept_cd
+FROM tb_emp
+WHERE addr LIKE '%강남%'
+;
+
+SELECT * FROM tb_dept WHERE dept_cd IN('100009','100010');
+
+SELECT 'X' FROM tb_emp WHERE addr LIKE '%서울%';
+
+SELECT 
+    A.dept_cd, A.dept_nm
+FROM tb_dept A
+WHERE EXISTS(
+                SELECT
+                    1
+                FROM tb_emp B
+                WHERE B.addr LIKE '%강남%'
+                AND A.dept_cd = B.dept_cd
+            )
+;
+
+-- 스칼라 서브쿼리 (SELECT절에 쓰는 서브쿼리) 연관성 서브쿼리
+SELECT
+    A.emp_no, A.emp_nm
+    , (SELECT dept_nm FROM tb_dept B WHERE A.dept_cd = B.dept_cd)AS dept_nm
+    , A.addr, A.birth_de
+FROM tb_emp A
+;
+
+-- 인라인 뷰 (FROM절에 쓰는 서브쿼리)
+SELECT 
+    B.emp_no, B.emp_nm, A.pay_avg
+FROM(
+        SELECT emp_no, AVG(pay_amt) AS pay_avg
+        FROM tb_sal_his
+        GROUP BY emp_no
+    )A, tb_emp B
+WHERE A.emp_no = B.emp_no
+;
